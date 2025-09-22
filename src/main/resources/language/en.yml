@@ -1,0 +1,36 @@
+stages:
+  safe: '<green>=== [SAFE] %ds ===</green>'
+  unsafe: '<red>=== [UNSAFE] %ds ===</red>'
+swap:
+  countdown: '<yellow>Swapping in %ds!</yellow>'
+  now: 'Swapping!'
+end:
+  winner: '<yellow><aqua><player></aqua> wins!</yellow>'
+  unexpected: '<dark_red>Game stops unexpectedly!</dark_red>'
+  aborted: '<red>Game aborted!</red>'
+
+commands:
+  players:
+    add: 'Added %d player(s) to the upcoming game'
+    remove: 'Removed %d player(s) from the upcoming game'
+    clear:
+      nought: '<red>You are removing nobody :-(</red>'
+      success: 'Reset candidate list'
+    query:
+      upcoming:
+        header: 'There are <count> player(s) ready to play the game:'
+        online: '- <aqua><player></aqua>'
+        offline: '- <gray><player></gray>'
+      ongoing:
+        header: 'Players of the running Death Swap game (%d/%d):'
+        alive: '- <aqua><player></aqua>'
+        lose: '- <gray><player></gray>'
+  start:
+    fail:
+      not-enough-players: "The game requires a minimum of 2 online players, but we've got only %d"
+      started: 'There is a running Death Swap game'
+    success: '<dark_red>Death Swap game starts!</dark_red>'
+  stop:
+    fail:
+      unstarted: 'The game is not running!'
+

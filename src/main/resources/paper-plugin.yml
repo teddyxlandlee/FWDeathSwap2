@@ -1,0 +1,18 @@
+name: FWDeathSwap2
+version: '${version}'
+main: xland.mcplugin.fwds.FWDeathSwap2
+api-version: '1.21'
+authors: [ teddyxlandlee ]
+
+permissions:
+  fwds.command:
+    description: 'Permission for /deathswap command'
+    default: op
+    children:
+      - fwds.command.players
+      - fwds.command.start
+      - fwds.command.stop
+      - fwds.command.config
+  fwds.command.players.query:
+    description: 'Permission for `/deathswap players query`'
+    default: true
