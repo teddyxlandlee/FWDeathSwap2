@@ -1,0 +1,8 @@
+language: en
+safe-time: [30, 120]
+unsafe-time: [20, 80]
+countdown-time: 10
+allow-portal: true
+allow-pvp: true
+lose-on-quit: true
+deal-ender-pearl: kill-existing-pearls

@@ -21,6 +21,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -38,7 +41,7 @@ public final class FWDeathSwap2 extends JavaPlugin {
 
     private void initConfig() {
         config.loadFrom(getConfig());
-        config.saveTo(getConfig());
+//        config.saveTo(getConfig());
         saveDefaultConfig();
 
         String fnLanguage = "language/" + config.getLanguage() + ".yml";
