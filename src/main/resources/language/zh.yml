@@ -1,0 +1,35 @@
+stages:
+  safe: '<green>=== [安全] 剩余 %d 秒 ===</green>'
+  unsafe: '<red>=== [危险] 剩余 %d 秒 ===</red>'
+swap:
+  countdown: '<yellow>%d 秒后交换位置！</yellow>'
+  now: '正在交换！'
+end:
+  winner: '<yellow><aqua><player></aqua> 获胜！</yellow>'
+  unexpected: '<dark_red>游戏意外终止！</dark_red>'
+  aborted: '<red>游戏已中止！</red>'
+
+commands:
+  players:
+    add: '已添加 %d 位玩家到预备游戏中'
+    remove: '已从预备游戏中移除 %d 位玩家'
+    clear:
+      nought: '<red>您没有移除任何玩家 :-(</red>'
+      success: '已清空候选列表'
+    query:
+      upcoming:
+        header: '当前有 <count> 位玩家准备游戏：'
+        online: '- <aqua><player></aqua>（在线）'
+        offline: '- <gray><player></gray>（离线）'
+      ongoing:
+        header: '当前生死交换游戏玩家列表（存活：%d/%d）：'
+        alive: '- <aqua><player></aqua>（存活）'
+        lose: '- <gray><player></gray>（已淘汰）'
+  start:
+    fail:
+      not-enough-players: "游戏需要至少 2 名在线玩家，当前只有 %d 名"
+      started: '当前已存在运行中的生死交换游戏'
+    success: '<dark_red>生死交换游戏正式开始！</dark_red>'
+  stop:
+    fail:
+      unstarted: '游戏尚未开始！'
