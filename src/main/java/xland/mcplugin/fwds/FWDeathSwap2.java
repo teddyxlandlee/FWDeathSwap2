@@ -6,6 +6,7 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
 import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver;
+import io.papermc.paper.event.player.PrePlayerAttackEntityEvent;
 import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import net.kyori.adventure.text.Component;
@@ -16,14 +17,12 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -75,6 +74,22 @@ public final class FWDeathSwap2 extends JavaPlugin {
             DSGameManager manager = gameManager;
             if (manager != null) {
                 manager.onPlayerGameOver(event.getPlayer(), i18n, FWDeathSwap2.this::removeManager);
+            }
+        }
+
+        @EventHandler
+        public void onAttack(PrePlayerAttackEntityEvent event) {
+            DSGameManager manager = gameManager;
+            if (manager != null && manager.cancelAttack(event.getPlayer(), event.getAttacked())) {
+                event.setCancelled(true);
+            }
+        }
+
+        @EventHandler
+        public void onPlayerPortal(PlayerPortalEvent event) {
+            DSGameManager manager = gameManager;
+            if (manager != null && manager.disallowsPortal(event.getPlayer())) {
+                event.setCancelled(true);
             }
         }
     }

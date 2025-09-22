@@ -7,6 +7,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Location;
 import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -111,6 +112,20 @@ public final class DSGameManager implements Tickable {
 
     public boolean isPlayerLoseOnQuit() {
         return this.config.isLoseOnQuit();
+    }
+
+    private boolean isAlivePlayer(Entity entity) {
+        return entity instanceof Player && this.players.contains(entity);
+    }
+
+    public boolean cancelAttack(Entity attacker, Entity attacked) {
+        if (this.config.isAllowPvp()) return false;
+        return isAlivePlayer(attacker) && isAlivePlayer(attacked);
+    }
+
+    public boolean disallowsPortal(Player player) {
+        if (!isAlivePlayer(player)) return false;    // do not block them
+        return !this.config.isAllowPortal();    // for alive player: disallow when disallowed
     }
 
     public void onGameAbort(@NotNull I18n i18n, @NotNull Runnable removeCallback) {
